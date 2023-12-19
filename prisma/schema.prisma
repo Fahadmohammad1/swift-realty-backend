@@ -11,6 +11,80 @@ datasource db {
 }
 
 model User {
-  id    Int    @id @default(autoincrement())
-  email String @unique
+  id             String        @id @default(uuid())
+  firstName      String
+  lastName       String
+  email          String        @unique
+  phone          String
+  password       String
+  role           UserRole
+  gender         String
+  presentAddress String
+  avatar         String
+  ratings        Int[]
+  bio            String
+  Testimonial    Testimonial[]
+  Review         Review[]
+  Blog           Blog[]
+}
+
+model Property {
+  id           String   @id @default(uuid())
+  name         String
+  ownerId      String
+  location     String
+  price        Int
+  description  String
+  category     String
+  status       String
+  bed          String
+  baths        String
+  ac           Boolean
+  gym          Boolean
+  swimmingPool Boolean
+  wifi         Boolean
+  washer       Boolean
+  garage       Boolean
+  fireplace    Boolean
+  availablity  String
+  type         String
+  Review       Review[]
+}
+
+model Testimonial {
+  id          String @id @default(uuid())
+  userId      String
+  user        User   @relation(fields: [userId], references: [id])
+  ratings     Int
+  description String
+}
+
+model Review {
+  id         String   @id @default(uuid())
+  propertyId String
+  property   Property @relation(fields: [propertyId], references: [id])
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  text       String
+  ratings    Int
+}
+
+model Blog {
+  id              String @id @default(uuid())
+  title           String
+  ownerId         String
+  user            User   @relation(fields: [ownerId], references: [id])
+  secondaryTitile String
+  thumbnail       String
+  description     String
+  highlightedInfo String
+}
+
+enum UserRole {
+  user
+  seller
+  buyer
+  agent
+  admin
+  superAdmin
 }
