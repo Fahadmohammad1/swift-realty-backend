@@ -1,16 +1,16 @@
 import express from 'express'
-// import validateRequest from '../../middlewares/validateRequest'
+import validateRequest from '../../middlewares/validateRequest'
 import { PropertyController } from './property.controller'
 import auth from '../../middlewares/auth'
 import { ENUM_USER_ROLE } from '../../../enums/user'
-// import { PropertyValidation } from './property.validation'
+import { PropertyValidation } from './property.validation'
 
 const router = express.Router()
 
 router.post(
   '/add',
   auth(ENUM_USER_ROLE.SELLER, ENUM_USER_ROLE.ADMIN),
-  // validateRequest(PropertyValidation.add),
+  validateRequest(PropertyValidation.add),
   PropertyController.addProperty,
 )
 
