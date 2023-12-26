@@ -11,7 +11,7 @@ const getAllProfiles = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
-    message: 'Profiels fetched successfully',
+    message: 'Users fetched successfully',
     data: result,
   })
 })
