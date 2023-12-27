@@ -26,12 +26,14 @@ model User {
   Testimonial    Testimonial[]
   Review         Review[]
   Blog           Blog[]
+  Property       Property[]
 }
 
 model Property {
   id           String   @id @default(uuid())
   name         String
   ownerId      String
+  owner        User     @relation(fields: [ownerId], references: [id])
   location     String
   price        Int
   description  String

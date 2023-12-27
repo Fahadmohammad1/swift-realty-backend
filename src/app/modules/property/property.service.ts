@@ -12,6 +12,8 @@ const addProperty = async (
     throw new ApiError(httpStatus.FORBIDDEN, 'Forbidded Access')
   }
 
+  data.ownerId = user.userId
+
   return await prisma.property.create({
     data,
   })
