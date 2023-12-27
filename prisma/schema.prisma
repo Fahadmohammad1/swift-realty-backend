@@ -34,6 +34,7 @@ model Property {
   name         String
   ownerId      String
   owner        User     @relation(fields: [ownerId], references: [id])
+  agent        String   @default("not available")
   location     String
   price        Int
   description  String

@@ -8,7 +8,7 @@ const add = z.object({
     location: z.string({
       required_error: 'location is required',
     }),
-    price: z.string({
+    price: z.number({
       required_error: 'price is required',
     }),
     description: z.string({
@@ -26,25 +26,25 @@ const add = z.object({
     baths: z.string({
       required_error: 'baths is required',
     }),
-    ac: z.string({
+    ac: z.boolean({
       required_error: 'ac is required',
     }),
-    gym: z.string({
+    gym: z.boolean({
       required_error: 'gym is required',
     }),
-    swimmingPool: z.string({
+    swimmingPool: z.boolean({
       required_error: 'swimmingPool is required',
     }),
-    wifi: z.string({
+    wifi: z.boolean({
       required_error: 'wifi is required',
     }),
-    washer: z.string({
+    washer: z.boolean({
       required_error: 'washer is required',
     }),
-    garage: z.string({
+    garage: z.boolean({
       required_error: 'garage is required',
     }),
-    fireplace: z.string({
+    fireplace: z.boolean({
       required_error: 'fireplace is required',
     }),
     availablity: z.string({
