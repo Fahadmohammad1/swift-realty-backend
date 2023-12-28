@@ -23,4 +23,10 @@ router.patch(
   PropertyController.updateProperty,
 )
 
+router.delete(
+  '/delete/:id',
+  auth(ENUM_USER_ROLE.SELLER, ENUM_USER_ROLE.ADMIN),
+  PropertyController.deleteProperty,
+)
+
 export const PropertyRoutes = router

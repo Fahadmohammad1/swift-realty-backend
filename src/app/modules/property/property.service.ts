@@ -65,9 +65,31 @@ const updateProperty = async (
 
   return result
 }
+
+// deleting a property listing
+const deleteProperty = async (user: JwtPayload, id: string) => {
+  const findProperty = await prisma.property.findFirst({
+    where: {
+      ownerId: user.userId,
+    },
+  })
+
+  if (findProperty?.ownerId !== user.userId) {
+    throw new ApiError(httpStatus.FORBIDDEN, 'Forbidden Access')
+  }
+
+  const result = await prisma.property.delete({
+    where: {
+      id,
+    },
+  })
+
+  return result
+}
 export const PropertyService = {
   addProperty,
   getAllProperty,
   getSingleProperty,
   updateProperty,
+  deleteProperty,
 }

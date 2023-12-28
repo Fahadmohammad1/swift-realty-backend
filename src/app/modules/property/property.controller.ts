@@ -51,9 +51,22 @@ const updateProperty = catchAsync(async (req: Request, res: Response) => {
   })
 })
 
+const deleteProperty = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params
+  const user = req.user as JwtPayload
+  const result = await PropertyService.deleteProperty(user, id)
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Property deleted successfully',
+    data: result,
+  })
+})
+
 export const PropertyController = {
   addProperty,
   getAllProperty,
   getSingleProperty,
   updateProperty,
+  deleteProperty,
 }
