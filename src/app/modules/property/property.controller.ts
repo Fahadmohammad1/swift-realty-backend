@@ -18,6 +18,17 @@ const addProperty = catchAsync(async (req: Request, res: Response) => {
   })
 })
 
+const getAllProperty = catchAsync(async (req: Request, res: Response) => {
+  const result = await PropertyService.getAllProperty()
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Property fetched successfully',
+    data: result,
+  })
+})
+
 export const PropertyController = {
   addProperty,
+  getAllProperty,
 }

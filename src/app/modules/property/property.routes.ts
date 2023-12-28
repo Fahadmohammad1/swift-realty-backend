@@ -7,6 +7,8 @@ import { PropertyValidation } from './property.validation'
 
 const router = express.Router()
 
+router.get('/', PropertyController.getAllProperty)
+
 router.post(
   '/add',
   auth(ENUM_USER_ROLE.SELLER, ENUM_USER_ROLE.ADMIN),

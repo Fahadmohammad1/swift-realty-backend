@@ -19,6 +19,10 @@ const addProperty = async (
   })
 }
 
+const getAllProperty = async () => {
+  return await prisma.property.findMany({})
+}
 export const PropertyService = {
   addProperty,
+  getAllProperty,
 }
