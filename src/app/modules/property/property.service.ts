@@ -4,6 +4,7 @@ import ApiError from '../../../errors/ApiError'
 import httpStatus from 'http-status'
 import prisma from '../../../shared/prisma'
 
+// listing property
 const addProperty = async (
   user: JwtPayload,
   data: Property,
@@ -19,10 +20,27 @@ const addProperty = async (
   })
 }
 
+// get all available property
 const getAllProperty = async () => {
   return await prisma.property.findMany({})
+}
+
+// get a single property details
+const getSingleProperty = async (id: string) => {
+  const findProperty = await prisma.property.findUnique({
+    where: {
+      id,
+    },
+  })
+
+  if (!findProperty) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Property does not exist')
+  }
+
+  return findProperty
 }
 export const PropertyService = {
   addProperty,
   getAllProperty,
+  getSingleProperty,
 }

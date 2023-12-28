@@ -7,6 +7,7 @@ import { PropertyValidation } from './property.validation'
 
 const router = express.Router()
 
+router.get('/:id', PropertyController.getSingleProperty)
 router.get('/', PropertyController.getAllProperty)
 
 router.post(
