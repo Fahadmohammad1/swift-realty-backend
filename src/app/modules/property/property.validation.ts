@@ -56,6 +56,29 @@ const add = z.object({
   }),
 })
 
+const update = z.object({
+  body: z.object({
+    name: z.string().optional(),
+    location: z.string().optional(),
+    price: z.number().optional(),
+    description: z.string().optional(),
+    category: z.string().optional(),
+    status: z.string().optional(),
+    bed: z.string().optional(),
+    baths: z.string().optional(),
+    ac: z.boolean().optional(),
+    gym: z.boolean().optional(),
+    swimmingPool: z.boolean().optional(),
+    wifi: z.boolean().optional(),
+    washer: z.boolean().optional(),
+    garage: z.boolean().optional(),
+    fireplace: z.boolean().optional(),
+    availablity: z.string().optional(),
+    type: z.string().optional(),
+  }),
+})
+
 export const PropertyValidation = {
   add,
+  update,
 }

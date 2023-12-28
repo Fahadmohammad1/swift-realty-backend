@@ -21,12 +21,12 @@ const addProperty = async (
 }
 
 // get all available property
-const getAllProperty = async () => {
+const getAllProperty = async (): Promise<Property[] | null> => {
   return await prisma.property.findMany({})
 }
 
 // get a single property details
-const getSingleProperty = async (id: string) => {
+const getSingleProperty = async (id: string): Promise<Property | null> => {
   const findProperty = await prisma.property.findUnique({
     where: {
       id,
@@ -39,8 +39,35 @@ const getSingleProperty = async (id: string) => {
 
   return findProperty
 }
+
+// update a property information
+const updateProperty = async (
+  user: JwtPayload,
+  id: string,
+  data: Partial<Property>,
+) => {
+  const findProperty = await prisma.property.findFirst({
+    where: {
+      ownerId: user.userId,
+    },
+  })
+
+  if (findProperty?.ownerId !== user.userId) {
+    throw new ApiError(httpStatus.FORBIDDEN, 'Forbidded Access')
+  }
+
+  const result = await prisma.property.update({
+    where: {
+      id,
+    },
+    data: data,
+  })
+
+  return result
+}
 export const PropertyService = {
   addProperty,
   getAllProperty,
   getSingleProperty,
+  updateProperty,
 }

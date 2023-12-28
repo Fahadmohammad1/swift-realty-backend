@@ -16,5 +16,11 @@ router.post(
   validateRequest(PropertyValidation.add),
   PropertyController.addProperty,
 )
+router.patch(
+  '/update/:id',
+  auth(ENUM_USER_ROLE.SELLER, ENUM_USER_ROLE.ADMIN),
+  validateRequest(PropertyValidation.update),
+  PropertyController.updateProperty,
+)
 
 export const PropertyRoutes = router

@@ -39,8 +39,21 @@ const getSingleProperty = catchAsync(async (req: Request, res: Response) => {
   })
 })
 
+const updateProperty = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params
+  const user = req.user as JwtPayload
+  const result = await PropertyService.updateProperty(user, id, req.body)
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Property information updated successfully',
+    data: result,
+  })
+})
+
 export const PropertyController = {
   addProperty,
   getAllProperty,
   getSingleProperty,
+  updateProperty,
 }
