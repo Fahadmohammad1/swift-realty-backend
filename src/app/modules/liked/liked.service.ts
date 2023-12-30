@@ -25,6 +25,16 @@ const addToLiked = async (
   })
 }
 
+const getAllLiked = async (user: JwtPayload) => {
+  console.log(user)
+  return await prisma.liked.findMany({
+    where: {
+      userId: user.userId,
+    },
+  })
+}
+
 export const LikedService = {
   addToLiked,
+  getAllLiked,
 }
