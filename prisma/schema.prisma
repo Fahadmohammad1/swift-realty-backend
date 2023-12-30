@@ -27,6 +27,7 @@ model User {
   Review         Review[]
   Blog           Blog[]
   Property       Property[]
+  Liked          Liked[]
 }
 
 model Property {
@@ -52,6 +53,15 @@ model Property {
   availablity  String
   type         String
   Review       Review[]
+  Liked        Liked[]
+}
+
+model Liked {
+  id         String   @id @default(uuid())
+  propertyId String
+  property   Property @relation(fields: [propertyId], references: [id])
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
 }
 
 model Testimonial {
