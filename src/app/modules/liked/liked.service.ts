@@ -26,7 +26,6 @@ const addToLiked = async (
 }
 
 const getAllLiked = async (user: JwtPayload) => {
-  console.log(user)
   return await prisma.liked.findMany({
     where: {
       userId: user.userId,
@@ -34,7 +33,25 @@ const getAllLiked = async (user: JwtPayload) => {
   })
 }
 
+const deleteLiked = async (user: JwtPayload, id: string) => {
+  const findProperty = await prisma.property.findUnique({
+    where: {
+      id,
+    },
+  })
+  if (findProperty?.ownerId !== user.userId) {
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'Unauthorized Access')
+  }
+
+  return await prisma.property.delete({
+    where: {
+      id,
+    },
+  })
+}
+
 export const LikedService = {
   addToLiked,
   getAllLiked,
+  deleteLiked,
 }
